@@ -36,15 +36,17 @@ function objToSql(ob) {
   
 
 var orm = {
-    selectAll: function(whatToSelect, tableInput) {
-      var queryString = "SELECT ?? FROM ??";
-      connection.query(queryString, [whatToSelect, tableInput], function(err, result) {
-        if (err) throw err;
-        console.log(result);
+    selectAll: function(tableInput, cb) {
+      var queryString = "SELECT * FROM " + tableInput + ";";
+      connection.query(queryString, function(err, result) {
+        if (err) {
+          throw err;
+        }
+        cb(result);
       });
     },
-    insertOne: function(tableInput, cols, vals, cb) {
-      var queryString = "INSERT INTO " + tableInput;
+    insertOne: function(table, cols, vals, cb) {
+      var queryString = "INSERT INTO " + table;
 
         queryString += " (";
         queryString += cols.toString();
@@ -63,8 +65,8 @@ var orm = {
           cb(result);
       });
     },
-    updateOne: function(tableInput, objColVals, condition, cb) {
-        var queryString = "UPDATE " + tableInput;
+    updateOne: function(table, objColVals, condition, cb) {
+        var queryString = "UPDATE " + table;
 
         queryString += " SET ";
         queryString += objToSql(objColVals);

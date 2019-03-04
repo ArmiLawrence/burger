@@ -1,0 +1,95 @@
+<h1>Eat that Burger</h1>
+
+<h2>Burger Choices!</h2>
+
+<ul>
+  {{#each burgers}}
+    {{#unless this.devoured}}
+      <li>
+          <p>
+              {{this.burger_name}}
+
+              <input type="hidden" name="devoured" value="true">		          			             
+              <button class="change-eat" data-id="{{id}}" data-neweat="{{devoured}}">
+                {{#if devoured}}YUM!{{else}}EAT ME!{{/if}}
+              </button>
+          
+          </p>
+      </li>
+
+    {{/unless}}
+  {{/each}}
+</ul>
+
+<h2>Devoured Burgers!</h2>
+
+<ul>
+  {{#each burgers}}
+    {{#if devoured}}
+      <li>
+          <p>
+              {{this.burger_name}}
+          </p>
+      </li>
+    {{/if}}
+  {{/each}}
+</ul>
+
+<h2>Add a Burger!</h2>
+
+<form class="create-update-form" action="/" method="POST">
+
+  <div class="form-group">
+    <label for="ca">Burger Name:</label>
+    <textarea type="text" id="ca" name="burger_name"></textarea>
+    <button type="submit" id="add">Order that Burger</button>
+  </div>
+  
+</form>
+
+
+<script type="text/javascript">
+
+$(".change-eat").on("click", function(event) {
+      var id = $(this).data("id");
+      var newEat = $(this).data("neweat");
+  
+      var newEatState = {
+        devoured: newEat
+      };
+  
+      // Send the PUT request.
+      $.ajax("/" + id, {
+        type: "PUT",
+        data: newEatState
+      }).then(
+        function() {
+          console.log("changed devoured to ", newEat);
+          // Reload the page to get the updated list
+          location.reload();
+        }
+      );
+  });
+  
+$("#add").on("submit", function(event) {
+      // Make sure to preventDefault on a submit event.
+      event.preventDefault();
+  
+      var newBurger = {
+        burger_name: $("#ca name=burger_name").val().trim()
+      };
+  
+      // Send the POST request.
+      $.ajax("/", {
+        type: "POST",
+        data: newBurger
+      }).then(
+        function() {
+          console.log("added " + newBurger + " burger." );
+          // Reload the page to get the updated list
+          location.reload();
+        }
+      );
+  });
+
+</script>
