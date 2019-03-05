@@ -10,7 +10,7 @@
               {{this.burger_name}}
 
               <input type="hidden" name="devoured" value="true">		          			             
-              <button class="change-eat" data-id="{{id}}" data-neweat="{{devoured}}">
+              <button class="change-eat" data-id="{{id}}" data-neweat="{{devoured}}" action="/burgers/" method="PUT">
                 {{#if devoured}}YUM!{{else}}EAT ME!{{/if}}
               </button>
           
@@ -37,7 +37,7 @@
 
 <h2>Add a Burger!</h2>
 
-<form class="create-update-form" action="/" method="POST">
+<form class="create-update-form" action="/burgers" method="POST">
 
   <div class="form-group">
     <label for="ca">Burger Name:</label>
@@ -52,19 +52,18 @@
 
 $(".change-eat").on("click", function(event) {
       var id = $(this).data("id");
-      var newEat = $(this).data("neweat");
-  
+       
       var newEatState = {
-        devoured: newEat
+        devoured: true
       };
   
       // Send the PUT request.
-      $.ajax("/" + id, {
+      $.ajax("/burgers/" + id, {
         type: "PUT",
         data: newEatState
       }).then(
         function() {
-          console.log("changed devoured to ", newEat);
+          console.log("changed devoured to ", newEatState);
           // Reload the page to get the updated list
           location.reload();
         }
@@ -80,7 +79,7 @@ $("#add").on("submit", function(event) {
       };
   
       // Send the POST request.
-      $.ajax("/", {
+      $.ajax("/burgers", {
         type: "POST",
         data: newBurger
       }).then(

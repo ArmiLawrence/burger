@@ -6,6 +6,3 @@ VALUES ('Bacon Cheese Burger')
     ,('Hamburger');
     
 
-INSERT INTO burgers (burger_name)
-VALUES ('Jalapeno')
-	,('Veggie');
