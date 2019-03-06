@@ -6,7 +6,7 @@ The goal of the Eat That Burger app is to create a list of burger choices by plu
 then the burger name is added to the Burger Choices! column of the page. The burger on the Burger Choices! column could be "eaten" by clicking on the "EAT ME!" button. 
 Once that burger is eaten, then it will go on the Devoured Burgers! side of the screen.
 
-![EatThatBurger](../burger/public/assets/img/EatThatBurger.PNG)
+![EatThatBurger](/public/assets/img/EatThatBurger.PNG)
 
 * Node packages downloaded for use in this app:
     * [Express](https://www.npmjs.com/package/express)
