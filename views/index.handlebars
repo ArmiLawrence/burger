@@ -85,7 +85,7 @@
                 </div>  
 
                    <div class="col-md-8">
-                      <form class="create-update-form justify-content-center" action="/burgers" method="POST">
+                      <form class="create-update-form justify-content-center">
 
                         <div class="form-group justify-content-center">
                           <label for="ca" class="text-white text-center">Burger Name:</label>
@@ -128,18 +128,17 @@ $(".change-eat").on("click", function(event) {
         function() {
           console.log("changed devoured to ", newEatState);
           // Reload the page to get the updated list
-          //debugger
           location.reload();
         }
       );
   });
   
-$("#add").on("submit", function(event) {
+$("#add").on("click", function(event) {
       // Make sure to preventDefault on a submit event.
       event.preventDefault();
   
       var newBurger = {
-        burger_name: $("#ca name=burger_name").val().trim()
+        burger_name: $("#ca[name=burger_name]").val().trim()
       };
   
       // Send the POST request.

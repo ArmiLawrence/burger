@@ -24,7 +24,6 @@ router.put("/burgers/:id", function(req, res) {
   console.log("condition", condition);
 
   burger.updateOne({devoured: true}, condition, function(result) {
-        //res.redirect("/");
         res.json(condition);
       });  
   });
@@ -33,7 +32,7 @@ router.put("/burgers/:id", function(req, res) {
 router.post("/burgers", function(req, res) { 
   burger.insertOne(["burger_name"], [req.body.burger_name], function(result) {
     console.log({ id: result.insertId });
-    res.redirect("/");
+    res.json({ id: result.insertId });
   });
 });
 
